@@ -1,0 +1,18 @@
+/* Article section */
+
+.article {
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.article__header {
+  margin-bottom: 16px;
+}
+
+.article__header .article-metadata {
+  margin-bottom: 8px;
+}
+
+.article h2[id] {
+  scroll-margin-top: var(--spacing-24);
+}
