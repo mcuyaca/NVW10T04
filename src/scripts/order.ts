@@ -10,49 +10,43 @@ const shop = document.querySelector("#shop")!;
 const errorLog = document.querySelector("#log")!;
 const cartContainer = document.querySelector("#cartList")!;
 const btnSubmit = document.querySelector("#submit")! as HTMLButtonElement;
-
-const submitObservable$ = fromEvent(btnSubmit, "click").pipe(
-  concatMap(() => {
-    return new Promise<void>((resolve) => {
-      errorLog.innerHTML = `<p style="color: green;">Se completó la orden!</p>`;
-      btnSubmit.disabled = true;
-      cartContainer.innerHTML = "<p>No hay productos en el carrito</p>";
-      cardList = {};
-      resolve();
-    });
-  }),
-  delay(5000)
-);
-
+const randomDelay = Math.round(Math.random() * 1500);
 let cardList: CardList = {};
 
-productList.forEach((product) => {
-  const element = document.createElement("div");
-  element.innerHTML = `
-      <div class="card-product">
-      <span class="category">${product.category}</span>
-      <figure>
-        <img width="90px" height="90px"
-          src="${product.image_url}" alt="${product.name}">
-      </figure>
-      <p>${product.name}</p>
-      <span class="price">$ ${product.price}</span>
-      <div class="counter">
-        <button data-id="${product.id}" class="button button--secondary">-</button>
-        <div class="counter-value">0</div>
-        <button data-id="${product.id}" class="button button--secondary">+</button>
-      </div>
-    </div>
-  `;
-  shop?.appendChild(element);
-});
+function showProducts() {
+  productList.forEach((product) => {
+    const element = document.createElement("div");
+    element.innerHTML = `
+          <div class="card-product">
+          <span class="category">${product.category}</span>
+          <figure>
+            <img width="90px" height="90px"
+              src="${product.image_url}" alt="${product.name}">
+          </figure>
+          <p>${product.name}</p>
+          <span class="price">$ ${product.price}</span>
+          <div class="counter">
+            <button data-id="${product.id}" class="button button--secondary "> Agregar</button>
+          </div>
+        </div>
+      `;
+    shop?.appendChild(element);
+  });
+}
+
+showProducts();
+
+const submitObservable$ = fromEvent(btnSubmit, "click").pipe(
+  delay(randomDelay),
+  concatMap(() => submitOrderToApi())
+);
 
 const btnAddAmount = document.querySelectorAll("button[data-id]")!;
 
 const observable$ = fromEvent(btnAddAmount, "click").pipe(
-  delay(2000),
+  delay(randomDelay),
   map((event) => (event.target as HTMLButtonElement).dataset.id),
-  concatMap((productId) => checkStock(productId!)),
+  concatMap((productId) => checkStockFromApi(productId!)),
   concatMap(() => submitObservable$)
 );
 observable$.subscribe();
@@ -79,7 +73,20 @@ function updateCard() {
   }
 }
 
-function checkStock(productId: string) {
+function printOutStock(productId: string) {
+  const msg = document.createElement("p");
+  msg.style.color = "red";
+  msg.style.fontSize = "0.8rem";
+  const foundProduct = productById(productId, productList);
+  msg.innerHTML = `Producto con ID ${foundProduct.name} fuera de stock`;
+  errorLog.appendChild(msg);
+}
+
+function productById(productId: string, data: any) {
+  return data.find((product: any) => product.id.toString() === productId);
+}
+
+function checkStockFromApi(productId: string) {
   return new Promise<void>((resolve) => {
     const foundProduct = productById(productId, productStockList);
 
@@ -92,15 +99,12 @@ function checkStock(productId: string) {
   });
 }
 
-function printOutStock(productId: string) {
-  const msg = document.createElement("p");
-  msg.style.color = "red";
-  msg.style.fontSize = "0.8rem";
-  const foundProduct = productById(productId, productList);
-  msg.innerHTML = `Producto con ID ${foundProduct.name} fuera de stock`;
-  errorLog.appendChild(msg);
-}
-
-function productById(productId: string, data: any) {
-  return data.find((product: any) => product.id.toString() === productId);
+function submitOrderToApi() {
+  return new Promise<void>((resolve) => {
+    errorLog.innerHTML = `<p style="color: green;">Se completó la orden!</p>`;
+    btnSubmit.disabled = true;
+    cartContainer.innerHTML = "<p>No hay productos en el carrito</p>";
+    cardList = {};
+    resolve();
+  });
 }
