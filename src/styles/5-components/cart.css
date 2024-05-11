@@ -1,0 +1,31 @@
+.details-cart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  margin-bottom: var(--spacing-8);
+}
+
+.subtotal-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+div.price-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-row p {
+  font-size: var(--font-sm);
+  line-height: var(--leading-7);
+  font-weight: 400;
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+.total-price p {
+  font-size: var(--font-lg);
+  line-height: var(--leading-8);
+  font-weight: 600;
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<div class="section">
+  <h1>Ejemplo de btn</h1>
+
+  <div class="shooping-cart__section">
+    <div class="shooping-cart__container">
+      <h2>List of Products </h2>
+      <div class="product-list" id="shop">
+      </div>
+    </div>
+
+
+
+    <div class="shooping-cart__container right-column">
+      <h2>Shooping Cart</h2>
+      <div class="details-cart">
+        <div class="subtotal-container" id="cartList">
+          <div class="price-row">
+            <p>No products</p>
+          </div>
+        </div>
+        <div class="price-row total-price">
+          <p>Total</p>
+          <p>$ 0</p>
+        </div>
+      </div>
+      <button id="submit" class="button" disabled>Submit Your Order</button>
+      <div id="log"></div>
+    </div>
+
+
+  </div>
+
+
+
+
+
+</div>
+<script type="module" src="/src/scripts/order.ts"></script>
+</body>
+
+</html>
