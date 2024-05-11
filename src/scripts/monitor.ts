@@ -3,19 +3,18 @@ import { throttleTime, map } from 'rxjs/operators';
 
 const eyeElements = document.querySelectorAll('.eye');
 
-const mousemove$ = fromEvent(document, 'mousemove').pipe(
+const mousemove$ = fromEvent<MouseEvent>(document, 'mousemove').pipe(
     throttleTime(200),
-    map((event: any) => {
+    map((event: MouseEvent) => {
         return {
-            x: event.x,
-            y: event.y
+            x: event.clientX,
+            y: event.clientY
         };
     })
 );
 
 mousemove$.subscribe({
-    next: (coordinates) => {
-            eyeElements.forEach((eye: any) => {
+    next: (coordinates) => eyeElements.forEach((eye: any) => {
                 const rect = eye.getBoundingClientRect();
 
                 const x = rect.left + rect.width / 2;
@@ -25,7 +24,7 @@ mousemove$.subscribe({
                 const rotation = (radian * (180 / Math.PI) * -1) + 270;
 
                 eye.style.transform = `rotate(${rotation}deg)`;
-            });
-        },
+            })
+        ,
     complete: () => console.log("Complete")
 });
