@@ -7,9 +7,29 @@
     <title>Monitor de Actividad</title>
 </head>
 <body>
-    <div class="box">
-        <div class="eye"></div>
-        <div class="eye"></div>
+    <div class="grid">
+        <div class="action">Acciones</div>
+        <div class="eyes box">
+            <div class="eye"></div>
+            <div class="eye"></div>
+        </div>
+        <div class="grid-console">
+            <div class="title"><h1>Consola de Eventos</h1></div>
+            <div class="console">
+                <div class="message">Bienvenido!</div>
+            </div>
+            <div class="data">
+                <h1>Datos</h1>
+                <ul>
+                    <li>Posicion: <p id="position"></p></li>
+                    <li>Clicks: <p id="clicks"></p></li>
+                    <li>Teclas: <p></p></li>
+                    <li>Copia: <p id="copia"></p></li>
+                    <li>Pega: <p></p></li>
+                </ul>
+            </div>
+        </div>
+        
     </div>
     <script type="module" src="../scripts/monitor.ts"></script>
 </body>

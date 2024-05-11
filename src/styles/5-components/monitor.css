@@ -4,11 +4,13 @@
 }
 
 body {
+    background: radial-gradient(#7c7c7c, #2e2e2e);
+}
+
+.eyes {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: radial-gradient(#f2761e, #ef4921);
 }
 
 .box
@@ -40,4 +42,71 @@ body {
     background: #000;
     border: 10px solid #2196f3;
     box-sizing: border-box;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.8fr;
+    grid-template-rows: 100vh;
+}
+
+@media (max-width: 1200px) {
+    .grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: 400px 400px 500px;
+    }
+    .console {
+        max-height: 500px;
+    }
+}
+
+.grid-console {
+    display: grid;
+    grid-template-rows: 0.5fr 5fr 4fr;
+}
+
+.title, .data {
+    margin: 16px;
+    padding: 16px;
+    background: #1d0053;
+    border-radius: 10px;
+    color: white;
+    ul {
+        margin-top: 16px;
+        padding-left: 40px;
+    };
+    li {
+        display: flex;
+        gap: 20px;
+        margin-block: 10px;
+    }
+}
+
+.console{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    overflow: auto;
+    margin-inline: 16px;
+    padding: 16px;
+    background: #000000;
+    border-radius: 10px;
+    color: white;
+}
+
+.console::-webkit-scrollbar {
+    width: 5px;
+}
+
+.console::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 5px;
+}
+.message {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 10px;
+    line-height: 1.1rem;
 }
