@@ -1,17 +1,10 @@
-import { delay, fromEvent, map, concatMap } from "rxjs";
+import { delay, fromEvent, map, concatMap, takeUntil, take } from "rxjs";
 import productList from "../data/products.json";
 import productStockList from "../data/productsStock.json";
 
 type CardList = {
   [k: string]: number;
 };
-
-const shop = document.querySelector("#shop")!;
-const errorLog = document.querySelector("#log")!;
-const cartContainer = document.querySelector("#cartList")!;
-const btnSubmit = document.querySelector("#submit")! as HTMLButtonElement;
-const randomDelay = Math.round(Math.random() * 1500);
-let cardList: CardList = {};
 
 function showProducts() {
   productList.forEach((product) => {
@@ -36,6 +29,13 @@ function showProducts() {
 
 showProducts();
 
+const shop = document.querySelector("#shop")!;
+const errorLog = document.querySelector("#log")!;
+const cartContainer = document.querySelector("#cartList")!;
+const btnSubmit = document.querySelector("#submit")! as HTMLButtonElement;
+const randomDelay = Math.round(Math.random() * 1500);
+let cardList: CardList = {};
+
 const submitObservable$ = fromEvent(btnSubmit, "click").pipe(
   delay(randomDelay),
   concatMap(() => submitOrderToApi())
@@ -43,13 +43,13 @@ const submitObservable$ = fromEvent(btnSubmit, "click").pipe(
 
 const btnAddAmount = document.querySelectorAll("button[data-id]")!;
 
-const observable$ = fromEvent(btnAddAmount, "click").pipe(
+const productObservable$ = fromEvent(btnAddAmount, "click").pipe(
   delay(randomDelay),
   map((event) => (event.target as HTMLButtonElement).dataset.id),
   concatMap((productId) => checkStockFromApi(productId!)),
   concatMap(() => submitObservable$)
 );
-observable$.subscribe();
+productObservable$.subscribe();
 
 function addAmount(productId: string) {
   const newAmount =
