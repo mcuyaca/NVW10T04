@@ -17,14 +17,12 @@ async function getResultsFromApi(query: string) {
 
 function showResults(data: GithubUSer) {
   resultTitleElement.textContent = "Usuarios Encontrados";
-
+  resultContainerElement.innerHTML = ``;
   data.items.find((user: Item, index) => {
     const resultsElement = document.createElement("li");
     resultsElement.innerHTML = `
-
 <img src="${user.avatar_url}" alt="" height="20" width="20">
      ${user.login} <a  href="${user.html_url}"> <i class="fa-brands fa-github"></i></a> 
-     
      `;
     resultContainerElement.appendChild(resultsElement);
     return index === 4;
