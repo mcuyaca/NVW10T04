@@ -8,7 +8,48 @@
 </head>
 <body>
     <div class="grid">
-        <div class="action">Acciones</div>
+        <div class="action">
+            <h1>Acciones</h1>
+            <p>Prueba cualquier boton:</p>
+            <div>
+                <button class="button">Seguir</button>
+                <button class="button">Actualizar</button>
+                <button class="button">Cancelar</button>
+            </div>
+            <div>Escribe o pega algún texto...</div>
+            <div><textarea placeholder="The watcher ..." id="textarea"></textarea></div>
+            <div>Selecciona tus herramientas de desarrollo: </div>
+            <div>
+                <form id="lenguajesForm">
+                    <input type="checkbox" id="js" name="language" value="js">
+                    <label for="js">JavaScript</label><br>
+                    
+                    <input type="checkbox" id="html" name="language" value="html">
+                    <label for="html">HTML</label><br>
+                    
+                    <input type="checkbox" id="css" name="language" value="css">
+                    <label for="css">CSS</label><br>
+                    
+                    <input type="checkbox" id=".net" name="language" value=".net">
+                    <label for=".net">.NET</label><br>
+                    
+                    <input type="checkbox" id="sql" name="language" value="sql">
+                    <label for="sql">SQL</label><br>
+                    
+                    <input type="checkbox" id="ruby" name="language" value="ruby">
+                    <label for="ruby">Angular</label><br>
+                    
+                    <input type="checkbox" id="node" name="language" value="node">
+                    <label for="node">Node</label><br>
+                    
+                    <input type="checkbox" id="java" name="language" value="java">
+                    <label for="java">Ruby</label><br>
+                    
+                    <input type="checkbox" id="typescript" name="language" value="typescript">
+                    <label for="typescript">TypeScript</label><br>
+                  </form>
+            </div>
+        </div>
         <div class="eyes box">
             <div class="eye"></div>
             <div class="eye"></div>
@@ -16,16 +57,16 @@
         <div class="grid-console">
             <div class="title"><h1>Consola de Eventos</h1></div>
             <div class="console">
-                <div class="message">Bienvenido!</div>
+                <div class="message">¡Bienvenido! Estaré observando todos tus movimientos</div>
             </div>
             <div class="data">
                 <h1>Datos</h1>
                 <ul>
                     <li>Posicion: <p id="position"></p></li>
                     <li>Clicks: <p id="clicks"></p></li>
-                    <li>Teclas: <p></p></li>
+                    <li>Tecla: <p id="tecla"></p></li>
                     <li>Copia: <p id="copia"></p></li>
-                    <li>Pega: <p></p></li>
+                    <li>Pega: <p id="pega"></p></li>
                 </ul>
             </div>
         </div>

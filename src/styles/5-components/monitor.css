@@ -53,7 +53,7 @@ body {
 @media (max-width: 1200px) {
     .grid {
       grid-template-columns: 1fr;
-      grid-template-rows: 400px 400px 500px;
+      grid-template-rows: 400px 200px 500px;
     }
     .console {
         max-height: 500px;
@@ -68,7 +68,7 @@ body {
 .title, .data {
     margin: 16px;
     padding: 16px;
-    background: #1d0053;
+    background: #14003a;
     border-radius: 10px;
     color: white;
     ul {
@@ -109,4 +109,21 @@ body {
     font-size: 14px;
     border-radius: 10px;
     line-height: 1.1rem;
+    background: #1d0053;
+}
+
+.action {
+    background: #fff;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 10px;
+    overflow: auto;
+    h1 {
+        font-size: 20px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+    div {
+        margin-block: 10px;
+    }
 }
