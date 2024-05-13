@@ -1,0 +1,57 @@
+.card-product {
+  --width-card: 160px;
+  --height-card: 222px;
+  width: var(--width-card);
+  height: var(--height-card);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--rounded-lg);
+  border: 1px solid var(--muted-foreground);
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  align-items: center;
+}
+
+.card-product .category {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 var(--spacing-2);
+  background-color: var(--violet-100);
+  border-radius: 0 var(--rounded-lg) 0 var(--rounded-lg);
+
+  font-size: var(--font-sm);
+  line-height: var(--leading-5);
+  font-weight: 400;
+}
+
+.card-product figure,
+p {
+  margin: 0;
+}
+
+.card-product .price {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  line-height: var(--leading-5);
+}
+
+.card-product .counter {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+.card-product .counter .counter-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: var(--spacing-2) var(--spacing-1);
+  gap: 4px;
+  border-radius: var(--rounded-md);
+  opacity: 1;
+  border: 1px solid var(--muted);
+}

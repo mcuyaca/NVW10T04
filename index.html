@@ -6,10 +6,54 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite + TS</title>
+  <link rel="stylesheet" href="/src/style.css">
 </head>
-<div id="app"></div>
+<div class="pancake-stack">
+  <header class="header">
+    <div class="container header__container">
+      <a href="/index.html">
+        <img src="/src/assets/codeable-logo-sm.svg" alt="codeable-logo" width="135" height="32" class="header__logo" />
+      </a>
+      <nav class="navigation navigation--header">
+        <ul class="navigation__list">
 
-<script type="module" src="/src/main.ts"></script>
+        </ul>
+      </nav>
+
+
+    </div>
+  </header>
+
+  <main>
+
+    <div class="section">
+      <div class="container">
+        <article class="article">
+          <div class="content">
+            <h1>
+              Proyecto "Demo de RxJS"
+            </h1>
+            <p> En este proyecto, usamos RxJS como una herramienta fundamental para gestionar flujos de datos
+              asíncronos de manera eficiente. Con RxJS, podemos simplificar la gestión de eventos, peticiones de red,
+              y otras operaciones asíncronas mediante la composición de observables y operadores. </p>
+            <h2>Demos :</h2>
+            <ul>
+              <li><a href="/src/page/order.html"> Simulación de Proceso de Pedidos</a></li>
+              <li><a href="/src/page/monitor.html"> Monitor de Actividad de Usuarios</a></li>
+              <li><a href="/src/page/streaming.html"> Streaming de datos</a></li>
+              <li><a href="/src/page/inline-autocomplete.html"> Autocompletado inline</a></li>
+            </ul>
+
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
 </body>
 
 </html>
