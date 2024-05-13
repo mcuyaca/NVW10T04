@@ -23,14 +23,14 @@ export let cartList: CartList = {};
 
 renderInitialProducts();
 
-const submitObservable$ = fromEvent(btnSubmit, "click").pipe(
+const submit$ = fromEvent(btnSubmit, "click").pipe(
   delay(randomDelay),
   concatMap(() => from(submitOrderToApi()))
 );
 
 const btnAddAmount = document.querySelectorAll("button[data-id]")!;
 
-const productObservable$ = fromEvent(btnAddAmount, "click").pipe(
+const product$ = fromEvent(btnAddAmount, "click").pipe(
   delay(randomDelay),
   concatMap((event) => {
     const productId = (event.target as HTMLButtonElement).dataset.id!;
@@ -44,7 +44,7 @@ const productObservable$ = fromEvent(btnAddAmount, "click").pipe(
       renderOutStock(response.productId);
     }
   }),
-  concatMap(() => submitObservable$),
+  concatMap(() => submit$),
   map((response) => {
     if (response.ok === true) {
       cartList = {};
@@ -52,7 +52,7 @@ const productObservable$ = fromEvent(btnAddAmount, "click").pipe(
     }
   })
 );
-productObservable$.subscribe();
+product$.subscribe();
 
 function checkStockFromApi(
   productId: string
