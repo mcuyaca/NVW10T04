@@ -1,19 +1,33 @@
 import { debounceTime, distinctUntilChanged, fromEvent, switchMap, map } from "rxjs"
 import {suggestions} from '../../public/autocomplete.json'
 
-const input = document.getElementById('autocomplete-input') as HTMLInputElement
+const input = document.getElementById('input') as HTMLInputElement
 
-const rDiv = document.getElementById('random-div') as HTMLElement
+const suggestion = document.getElementById('suggestion') as HTMLElement
+
+let suggestionWord: any = ""
 
 function findSuggestion(userInput: string) {
   const promise = new Promise<string>(
     (resolve, _reject) => {
       setTimeout(()=>{
-        userInput = userInput.toLocaleLowerCase()
-        let suggestion = suggestions.find(
-          (word) => word.indexOf(userInput) === 0
-        )
-        if (suggestion) resolve(suggestion)
+        // find suggestion
+        if (userInput) {
+          let input = userInput.toLocaleLowerCase()
+          let suggestion = suggestions.find(
+            (word) => word.indexOf(input) === 0
+          )
+          
+          // make suggestion match input casing
+          if (suggestion) {
+            let head = userInput
+            let tail = suggestion.slice(head.length)
+            suggestionWord = head + tail
+            resolve(head + tail)
+          }
+        } else {
+          resolve("")
+        }
       }, 400)
     }
   )
@@ -35,8 +49,25 @@ let keyup$ = fromEvent(input, 'keydown').pipe(
   )
 )
 
-keyup$.subscribe(renderAutocomplete)
+let tab$ = fromEvent<KeyboardEvent>(input, 'keydown').pipe(
+  map(
+    (event: KeyboardEvent) => {
+      return event.key
+    }
+  ),
+)
 
-function renderAutocomplete(value: string):void{
-  rDiv.innerText = value
+tab$.subscribe(acceptSuggestion)
+
+keyup$.subscribe(renderSuggestion)
+
+function renderSuggestion(value: string):void{
+  suggestion.innerText = value
+}
+
+function acceptSuggestion(keyName: string):void{
+  if (keyName === 'Tab') {
+    suggestion.innerText = ''
+    input.value = suggestionWord
+  }
 }
