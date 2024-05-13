@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: radial-gradient(#7c7c7c, #2e2e2e);
+}
+
+.eyes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box
+{
+    display: flex;
+}
+
+.box .eye
+{
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: block;
+    background: #fff;
+    margin: 0 20px;
+    border-radius: 50%;
+}
+
+.box .eye::before
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 35px;
+    transform: translate(-50%, -50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #000;
+    border: 10px solid #2196f3;
+    box-sizing: border-box;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.8fr;
+    grid-template-rows: 100vh;
+}
+
+@media (max-width: 1200px) {
+    .grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: 400px 200px 500px;
+    }
+    .console {
+        max-height: 500px;
+    }
+}
+
+.grid-console {
+    display: grid;
+    grid-template-rows: 0.5fr 5fr 4fr;
+}
+
+.title, .data {
+    margin: 16px;
+    padding: 16px;
+    background: #14003a;
+    border-radius: 10px;
+    color: white;
+    ul {
+        margin-top: 16px;
+        padding-left: 40px;
+    };
+    li {
+        display: flex;
+        gap: 20px;
+        margin-block: 10px;
+    }
+}
+
+.console{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    overflow: auto;
+    margin-inline: 16px;
+    padding: 16px;
+    background: #000000;
+    border-radius: 10px;
+    color: white;
+}
+
+.console::-webkit-scrollbar {
+    width: 5px;
+}
+
+.console::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 5px;
+}
+.message {
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 10px;
+    line-height: 1.1rem;
+    background: #1d0053;
+}
+
+.action {
+    background: #fff;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 10px;
+    overflow: auto;
+    h1 {
+        font-size: 20px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+    div {
+        margin-block: 10px;
+    }
+}
