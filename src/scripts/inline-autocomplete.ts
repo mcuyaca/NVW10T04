@@ -67,7 +67,7 @@ function renderSuggestion(value: string):void{
 
 function acceptSuggestion(keyName: string):void{
   if (keyName === 'Tab') {
-    suggestion.innerText = ''
     input.value = suggestionWord
+    suggestion.innerText = ''
   }
 }

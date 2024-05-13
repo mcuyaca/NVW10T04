@@ -1,4 +1,4 @@
-import { delay, fromEvent, concatMap } from "rxjs";
+import { delay, fromEvent, concatMap, from, map } from "rxjs";
 
 import productStockList from "../data/productsStock.json";
 import {
@@ -23,40 +23,49 @@ export let cartList: CartList = {};
 
 renderInitialProducts();
 
-const submitObservable$ = fromEvent(btnSubmit, "click").pipe(
+const submit$ = fromEvent(btnSubmit, "click").pipe(
   delay(randomDelay),
-  concatMap(() => submitOrderToApi())
+  concatMap(() => from(submitOrderToApi()))
 );
 
 const btnAddAmount = document.querySelectorAll("button[data-id]")!;
 
-const productObservable$ = fromEvent(btnAddAmount, "click").pipe(
+const product$ = fromEvent(btnAddAmount, "click").pipe(
   delay(randomDelay),
   concatMap((event) => {
     const productId = (event.target as HTMLButtonElement).dataset.id!;
-    return checkStockFromApi(productId);
+    return from(checkStockFromApi(productId));
   }),
-  concatMap(() => submitObservable$)
-);
-productObservable$.subscribe();
-
-function checkStockFromApi(productId: string) {
-  return new Promise<void>((resolve) => {
-    const foundProduct = productById(productId, productStockList);
-    if (foundProduct?.stock! > 0) {
-      cartList[productId] = (cartList[productId] ?? 0) + 1;
+  map((response) => {
+    if (response.stock > 0) {
+      cartList[response.productId] = (cartList[response.productId] ?? 0) + 1;
       renderdUpdatedCard();
     } else {
-      renderOutStock(productId);
-      cartList = {};
+      renderOutStock(response.productId);
     }
-    resolve();
+  }),
+  concatMap(() => submit$),
+  map((response) => {
+    if (response.ok === true) {
+      cartList = {};
+      renderCompleteOrder();
+    }
+  })
+);
+product$.subscribe();
+
+function checkStockFromApi(
+  productId: string
+): Promise<{ productId: string; stock: number }> {
+  return new Promise<{ productId: string; stock: number }>((resolve) => {
+    const product = productById(productId, productStockList);
+    const stock = product ? product.stock : 0;
+    resolve({ productId, stock });
   });
 }
 
-function submitOrderToApi() {
-  return new Promise<void>((resolve) => {
-    renderCompleteOrder();
-    resolve();
+function submitOrderToApi(): Promise<{ ok: boolean }> {
+  return new Promise<{ ok: boolean }>((resolve) => {
+    resolve({ ok: true });
   });
 }

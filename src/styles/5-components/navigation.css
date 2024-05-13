@@ -8,34 +8,109 @@
 </nav>
 */
 
-.navigation ul {
+.navigation {
+}
+
+.navigation__list {
   list-style: none;
   display: flex;
-  gap: 32px;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 }
 
 .navigation a {
-  display: block;
   padding: var(--spacing-2) var(--spacing-3);
   border-radius: var(--rounded-md);
-
   color: var(--foreground);
   font-size: var(--font-sm);
   font-weight: 500;
   line-height: var(--leading-5);
   text-decoration: none;
-
-  transition: background-color 300ms;
 }
 
-.navigation a:hover {
+.navigation a:hover,
+.navigation--menu a:hover {
   background-color: var(--background-hover);
 }
 
-.navigation .active a {
+.navigation .active a,
+.navigation--menu .active a {
   background-color: var(--background-active);
 }
 
-.navigation .active a:hover {
+.navigation .active a:hover,
+.navigation--menu .active a {
   background-color: var(--background-hover);
+}
+
+@media (min-width: 48rem) {
+  .navigation {
+    display: block;
+  }
+}
+
+.navigation--menu {
+  display: none;
+  width: 100%;
+  background: var(--background);
+  box-shadow: 0px 2px 2px hsla(0, 0%, 32%, 0.2);
+  position: absolute;
+  top: 72px;
+  right: 0;
+  z-index: 10;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-4) 0;
+}
+
+.navigation--menu-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.navigation--menu-item {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.navigation--menu-item a {
+  padding: var(--spacing-2) var(--spacing-3);
+  width: 100%;
+  margin-inline: var(--spacing-4);
+  border-radius: var(--rounded-md);
+  color: var(--foreground);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  line-height: var(--leading-5);
+  text-decoration: none;
+}
+
+.navigation--open {
+  display: flex;
+}
+
+.navigation--header {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .navigation__list {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 48rem) {
+  .navigation--open {
+    display: none;
+  }
+  .navigation--header {
+    display: flex;
+  }
 }
