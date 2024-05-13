@@ -1,62 +1,64 @@
 /*
-<header class="header container">
-  <h1 class="header__logo"><a href="">Logo</a></h1>
-  <nav class="header__navigation navigation">...</nav>
-  <div class="header__actions">...</div>
-  <button class="header__menu-icon button button--icon button--outline">
-    <svg>...</svg>
-  </button>
+<header class="header">
+  <div class="container header__container">
+    <img
+      src="assets/images/codeable-logo-sm.svg"
+      alt="codeable-logo"
+      width="135"
+      height="32"
+      class="header__logo"
+    />
+    <nav class="navigation header__navigation">
+      <ul>
+        <li><a href="/diagramas.html">Diagramas VV</a></li>
+        <li><a href="/funciones.html">Funciones</a></li>
+        <li><a href="/dom.html">Manipulación del DOM</a></li>
+      </ul>
+    </nav>
+    <p class="header__name">Diego Torres</p>
+  </div>
 </header>
 */
 
 .header {
-  width: 100%;
-  height: var(--spacing-24);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 32px;
-  background-color: var(--background);
-
+  padding: var(--spacing-4, 16px) 0px;
   position: sticky;
   top: 0;
+  z-index: 2;
+  background-color: var(--background);
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
 }
 
 .header__logo {
-  color: var(--primary);
-  font-family: var(--display);
-  font-size: var(--font-3xl);
-  font-weight: 500;
-  line-height: var(--leading-none);
+  margin-right: 1rem;
 }
 
-.header__logo a {
-  display: inline-block;
-  text-decoration: none;
-  color: inherit;
-  transition: color 300ms;
+.header__name {
+  display: block;
+  color: var(--muted-foreground, #525252);
+  font-weight: 600;
+  line-height: var(--leading-6);
+  margin-left: auto;
 }
 
-.header__logo a:hover {
-  color: var(--primary-hover);
-}
-
-.header__navigation {
-  display: none;
-  flex-grow: 1;
-}
-
-.header__actions {
-  display: none;
-}
-
-@media (min-width: 40rem) {
-  .header__navigation,
-  .header__actions {
+@media (min-width: 48rem) {
+  .header__name {
     display: block;
   }
+}
 
-  .header__menu-icon {
+.header__menu {
+  display: flex;
+  align-items: center;
+  margin-left: var(--spacing-4);
+}
+
+@media (min-width: 48rem) {
+  .header__menu {
     display: none;
   }
 }
