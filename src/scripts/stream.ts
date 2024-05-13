@@ -47,7 +47,7 @@ const maxTemperature$ = buttonClick$.pipe(
 );
 const humidity$ = buttonClick$.pipe(
   switchMap((_ev) =>
-    interval(4000).pipe(
+    interval(3000).pipe(
       map((_x) => {
         if (!humidity) {
           throw new Error("---");
@@ -68,7 +68,7 @@ const humidity$ = buttonClick$.pipe(
 );
 const wind$ = buttonClick$.pipe(
   switchMap((_ev) =>
-    interval(3000).pipe(
+    interval(1500).pipe(
       map((_x) => {
         if (!windSpeed) {
           throw new Error("---");
