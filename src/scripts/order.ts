@@ -1,4 +1,4 @@
-import { delay, fromEvent, concatMap } from "rxjs";
+import { delay, fromEvent, concatMap, from, tap, map } from "rxjs";
 
 import productStockList from "../data/productsStock.json";
 import {
@@ -34,29 +34,38 @@ const productObservable$ = fromEvent(btnAddAmount, "click").pipe(
   delay(randomDelay),
   concatMap((event) => {
     const productId = (event.target as HTMLButtonElement).dataset.id!;
-    return checkStockFromApi(productId);
+    return from(checkStockFromApi(productId));
   }),
-  concatMap(() => submitObservable$)
+  map((response) => {
+    if (response.stock > 0) {
+      cartList[response.productId] = (cartList[response.productId] ?? 0) + 1;
+      renderdUpdatedCard();
+    } else {
+      renderOutStock(response.productId);
+    }
+  }),
+  concatMap(() => from(submitObservable$)),
+  map((response) => {
+    if (response.ok === true) {
+      cartList = {};
+      renderCompleteOrder();
+    }
+  })
 );
 productObservable$.subscribe();
 
-function checkStockFromApi(productId: string) {
-  return new Promise<void>((resolve) => {
-    const foundProduct = productById(productId, productStockList);
-    if (foundProduct?.stock! > 0) {
-      cartList[productId] = (cartList[productId] ?? 0) + 1;
-      renderdUpdatedCard();
-    } else {
-      renderOutStock(productId);
-      cartList = {};
-    }
-    resolve();
+function checkStockFromApi(
+  productId: string
+): Promise<{ productId: string; stock: number }> {
+  return new Promise<{ productId: string; stock: number }>((resolve) => {
+    const product = productById(productId, productStockList);
+    const stock = product ? product.stock : 0;
+    resolve({ productId, stock });
   });
 }
 
-function submitOrderToApi() {
-  return new Promise<void>((resolve) => {
-    renderCompleteOrder();
-    resolve();
+function submitOrderToApi(): Promise<{ ok: boolean }> {
+  return new Promise<{ ok: boolean }>((resolve) => {
+    resolve({ ok: true });
   });
 }
