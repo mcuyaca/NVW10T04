@@ -5,36 +5,54 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="src/style.css">
   <title>Vite + TS</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
-  <div class="streaming container">
-    <h1 class="streaming__heading">Weather Streaming</h1>
-    <div class="streaming__get-data">
-      <label for="city" >Ingrese el nombre de la ciudad</label>
-      <input type="text" id="city" name="city" >
-      <button id="btn" class="button button--sm" disabled>Actualizar</button>
+<div class="pancake-stack">
+  <header class="header">
+    <div class="container header__container">
+      <a href="/index.html">
+        <img src="/src/assets/codeable-logo-sm.svg" alt="codeable-logo" width="135" height="32" class="header__logo" />
+      </a>
+      <nav class="navigation navigation--header">
+        <ul class="navigation__list">
+
+        </ul>
+      </nav>
+
+
     </div>
-    <ul class="streaming__kpi">
-      <li>
-        <h3>Temperatura mínima</h3>
-        <div id="min-temperature" class="streaming__response"></div>
-      </li>
-      <li>
-        <h3>Temperatura máxima</h3>
-        <div id="max-temperature" class="streaming__response"></div>
-      </li>
-      <li>
-        <h3>Humedad</h3>
-        <div id="humidity" class="streaming__response"></div>
-      </li>
-      <li>
-        <h3>Velocidad del Viento</h3>
-        <div id="wind" class="streaming__response"></div>
-      </li>
-    </ul>
-  </div>
-<script type="module" src="/src/stream.ts"></script>
+  </header>
+
+  <main>
+
+    <div class="section">
+      <div class="container">
+        <article class="article">
+          <div class="content">
+            <h1>
+              Proyecto "Demo de RxJS"
+            </h1>
+            <p> En este proyecto, usamos RxJS como una herramienta fundamental para gestionar flujos de datos
+              asíncronos de manera eficiente. Con RxJS, podemos simplificar la gestión de eventos, peticiones de red,
+              y otras operaciones asíncronas mediante la composición de observables y operadores. </p>
+            <h2>Demos :</h2>
+            <ul>
+              <li><a href="./src/page/example.html"> Example</a></li>
+              <li><a href="./src/page/orderProces.html"> Simulación de Proceso de Pedidos</a></li>
+              <li><a href="./src/page/monitor.html"> Monitor de Actividad de Usuarios</a></li>
+            </ul>
+
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+<script type="module" src="/src/main.ts"></script>
 </body>
 
 </html>

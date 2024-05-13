@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/style.css">
+  <title>Vite + TS</title>
+</head>
+  <div class="streaming container">
+    <h1 class="streaming__heading">Weather Streaming</h1>
+    <div class="streaming__get-data">
+      <label for="city" >Ingrese el nombre de la ciudad</label>
+      <input type="text" id="city" name="city" >
+      <button id="btn" class="button button--sm" disabled>Actualizar</button>
+    </div>
+    <ul class="streaming__kpi">
+      <li>
+        <h3>Temperatura mínima</h3>
+        <div id="min-temperature" class="streaming__response"></div>
+      </li>
+      <li>
+        <h3>Temperatura máxima</h3>
+        <div id="max-temperature" class="streaming__response"></div>
+      </li>
+      <li>
+        <h3>Humedad</h3>
+        <div id="humidity" class="streaming__response"></div>
+      </li>
+      <li>
+        <h3>Velocidad del Viento</h3>
+        <div id="wind" class="streaming__response"></div>
+      </li>
+    </ul>
+  </div>
+<script type="module" src="/src/stream.ts"></script>
+</body>
+
+</html>
