@@ -1,0 +1,14 @@
+#autocomplete-container
+#autocomplete-suggestion
+#autocomplete-input{
+  width: var(--width-xs);
+  height: var(--leading-6);
+  line-height: var(--leading-6);
+  margin: 0 auto;
+}
+
+#autocomplete-input{
+  font-size: var(--font-lg);
+  line-height: var(--leading-5);
+  font-family: var(--display);
+}
